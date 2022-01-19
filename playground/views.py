@@ -7,7 +7,7 @@ from store.models import Product
 
 
 def say_hello(request):
-    exists = Product.objects.filter(pk=1).exists()
+    queryset = Product.objects.filter(unit_price__range=(20,30))
     #return bolean
 
-    return render(request, 'hello.html', {'name': 'Mosh'})
+    return render(request, 'hello.html', {'name': 'Mosh', 'products':list(queryset)})
