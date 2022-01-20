@@ -3,8 +3,9 @@ from django.db.models import Q, F
 from store.models import Product, OrderItem
 
 def say_hello(request):
-    #distinct to remove duplicate item
-    productIds =  OrderItem.objects.values('product__id').distinct()
-    queryset= Product.objects.filter(id__in=productIds).order_by('title')
+
+    queryset= Product.objects.prefetch_related('promotions').select_related('collection').all()
+    #in this case, django is not going to query the related tables unless we speicifically instructed to do so
+    # preload the data
 
     return render(request, 'hello.html', {'name': 'Mosh', 'products':list(queryset)})
