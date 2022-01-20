@@ -1,10 +1,13 @@
 from cgitb import lookup
 from django.contrib import admin, messages
 from django.http import HttpRequest
+
+from tags.models import TaggedItem
 from . import models
 from django.db.models import Count
 from django.urls import reverse
 from django.utils.html import format_html, urlencode
+from django.contrib.contenttypes.admin import GenericTabularInline
 
 class InventoryFilter(admin.SimpleListFilter):
     title = 'inventory'
@@ -18,6 +21,10 @@ class InventoryFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset) :
         if self.value() == '<10':
             return queryset.filter(inventory__lt=10)
+
+class TagInline(GenericTabularInline):
+    autocomplete_fields = ['tag']
+    model = TaggedItem
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -33,6 +40,7 @@ class ProductAdmin(admin.ModelAdmin):
     #like models, we can also preselect/ preload the collection
     list_select_related = ['collection']
     search_fields=['title']
+    inlines = [TagInline]
 
     def collection_id(self, product):
         return product.collection.id
