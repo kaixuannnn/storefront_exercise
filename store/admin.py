@@ -32,6 +32,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_per_page = 10
     #like models, we can also preselect/ preload the collection
     list_select_related = ['collection']
+    search_fields=['title']
 
     def collection_id(self, product):
         return product.collection.id
@@ -74,7 +75,16 @@ class CustomerAdmin(admin.ModelAdmin):
     list_per_page = 10
     search_fields = ['first_name__istartswith', 'last_name__istartswith']
 
+#we also have StackInline
+class OrderItemInline(admin.TabularInline):
+    autocomplete_fields = ['product']
+    model = models.OrderItem
+    extra = 0
+    min_num =1
+    max_num = 10
+
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'placed_at', 'customer']
     autocomplete_fields = ['customer']
+    inlines = [OrderItemInline]
