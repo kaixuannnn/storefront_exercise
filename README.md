@@ -10,3 +10,7 @@
 # Create Custom Serializer Fields
 
 - API Model doesnt necesssary need to look exactly the same as Data Model
+
+# Serializing Relationships
+
+- another way to do is doing in nested way

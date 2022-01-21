@@ -1,7 +1,12 @@
 from decimal import Decimal
+from unittest.util import _MAX_LENGTH
 from rest_framework import serializers
 
 from store.models import Product, Collection
+
+class CollectionSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    title = serializers.CharField(max_length = 255)
 
 #serializer -  can use it to convert a product object to a Python dictionary
 class ProductSerializer(serializers.Serializer):
@@ -11,7 +16,9 @@ class ProductSerializer(serializers.Serializer):
     price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
     # collection = serializers.PrimaryKeyRelatedField(queryset = Collection.objects.all())
     # Besides, we can also get string related field
-    collection = serializers.StringRelatedField()
-    
+    # collection = serializers.StringRelatedField()
+    # we can do it in nested field
+    collection =  CollectionSerializer()
+
     def calculate_tax(self, product: Product):
         return product.unit_price * Decimal(1.1)
