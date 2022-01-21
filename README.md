@@ -6,3 +6,7 @@
 - When the custom app is removed , tag and store app can run nicely
 
 # Serializer
+
+# Create Custom Serializer Fields
+
+- API Model doesnt necesssary need to look exactly the same as Data Model
