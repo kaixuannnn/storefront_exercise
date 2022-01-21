@@ -8,7 +8,7 @@ from .serializer import ProductSerializer
 
 @api_view()
 def product_list(request):
-    queryset = Product.objects.all()
+    queryset = Product.objects.select_related('collection').all()
     # many = True, the serializer knows that ut should iterate over this query set and 
     # convert each product object to a dictionary
     serializer= ProductSerializer(queryset, many=True)
