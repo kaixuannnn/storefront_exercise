@@ -18,7 +18,12 @@ class ProductSerializer(serializers.Serializer):
     # Besides, we can also get string related field
     # collection = serializers.StringRelatedField()
     # we can do it in nested field
-    collection =  CollectionSerializer()
+    # collection =  CollectionSerializer()
+    # view_name is the field that we use to ctreate the hyperlink
+    collection = serializers.HyperlinkedRelatedField(
+        queryset = Collection.objects.all(),
+        view_name='collection_detail'
+    )
 
     def calculate_tax(self, product: Product):
         return product.unit_price * Decimal(1.1)

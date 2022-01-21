@@ -14,3 +14,5 @@
 # Serializing Relationships
 
 - another way to do is doing in nested way
+- another way we can do is add a hyperlink
+- conclude, we have 4 ways ro serialize the relationships: primary_key, string, nested object, hyperlink

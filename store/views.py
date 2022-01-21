@@ -11,7 +11,7 @@ def product_list(request):
     queryset = Product.objects.select_related('collection').all()
     # many = True, the serializer knows that ut should iterate over this query set and 
     # convert each product object to a dictionary
-    serializer= ProductSerializer(queryset, many=True)
+    serializer= ProductSerializer(queryset, many=True, context={'request':request})
     return Response(serializer.data)
 
 @api_view()
@@ -23,3 +23,7 @@ def product_detail(request, id):
         return Response(serializer.data)
     except Product.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view()
+def collection_detail(request, pk):
+    return Response('OK')
