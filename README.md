@@ -16,3 +16,10 @@
 - another way to do is doing in nested way
 - another way we can do is add a hyperlink
 - conclude, we have 4 ways ro serialize the relationships: primary_key, string, nested object, hyperlink
+
+# Model Serializer
+
+- As you can see, we have 2 place on validating and defining our field
+- So we can use modelSerializer to avoid the duplication
+- ModelSerializer by default using primarykey related fields
+- if the definition is not what we want we can serialize it like before we do
