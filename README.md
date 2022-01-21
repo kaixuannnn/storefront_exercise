@@ -23,3 +23,7 @@
 - So we can use modelSerializer to avoid the duplication
 - ModelSerializer by default using primarykey related fields
 - if the definition is not what we want we can serialize it like before we do
+
+# Deserializing Objects
+
+- POST

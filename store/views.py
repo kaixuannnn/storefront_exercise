@@ -6,13 +6,18 @@ from rest_framework import status
 from .models import Product
 from .serializer import ProductSerializer
 
-@api_view()
+@api_view(['GET', 'POST'])
 def product_list(request):
-    queryset = Product.objects.select_related('collection').all()
-    # many = True, the serializer knows that ut should iterate over this query set and 
-    # convert each product object to a dictionary
-    serializer= ProductSerializer(queryset, many=True, context={'request':request})
-    return Response(serializer.data)
+    if request.method == 'GET':
+        queryset = Product.objects.select_related('collection').all()
+        # many = True, the serializer knows that ut should iterate over this query set and 
+        # convert each product object to a dictionary
+        serializer= ProductSerializer(queryset, many=True, context={'request':request})
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ProductSerializer(data=request.data)
+        # serializer.validated_data
+        return Response('ok')
 
 @api_view()
 def product_detail(request, id):
