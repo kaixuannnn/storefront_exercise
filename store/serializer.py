@@ -18,7 +18,7 @@ class ProductSerializer(serializers.ModelSerializer):
         #Besides, we can show all the field by doing this, however, it is not recommended, we dont want all the field to be exposed to outside world
         #fields = '__all__'
         # all the code below can be eliminated
-        fields = ['id', 'title', 'unit_price', 'price_with_tax','collection']
+        fields = ['id', 'title','description', 'slug','inventory','unit_price', 'price_with_tax','collection']
     # id = serializers.IntegerField()
     # title =  serializers.CharField(max_length=255)
     # price =  serializers.DecimalField(max_digits=6, decimal_places=2, source='unit_price')

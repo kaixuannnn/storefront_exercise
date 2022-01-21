@@ -24,19 +24,28 @@ def product_list(request):
         #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         # other than if else, we can use raise_exception to write a clearer code
         serializer.is_valid(raise_exception=True)
-        serializer.validated_data
-        return Response('ok')
+        # serializer.validated_data
+        # if you print(serializer.validated_data), it returns the dictionary of the object
+        # when saving the data, we no need to call the serializer.validated_data
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view()
+@api_view(['GET','PUT', 'PATCH'])
 def product_detail(request, id):
-    try: 
+    product = get_object_or_404(Product, pk=id)
+    if request.method == 'GET':
         # product = Product.objects.get(pk=id)
-        product = get_object_or_404(Product, pk=id)
         serializer = ProductSerializer(product)
         return Response(serializer.data)
-    except Product.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    # except Product.DoesNotExist:
+    #     return Response(status=status.HTTP_404_NOT_FOUND)
+    elif request.method == 'PUT':
+        serializer = ProductSerializer(product, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
 
 @api_view()
 def collection_detail(request, pk):
