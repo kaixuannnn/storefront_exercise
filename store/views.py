@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet 
 from rest_framework import status
-from .models import Collection, OrderItem, Product
-from .serializer import CollectionSerializer, ProductSerializer
+from .models import Collection, OrderItem, Product, Review
+from .serializer import CollectionSerializer, ProductSerializer, ReviewSerializer
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
@@ -39,3 +39,8 @@ class CollectionViewSet(ModelViewSet):
                 )
         collection.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ReviewViewSet(ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
