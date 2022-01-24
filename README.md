@@ -31,3 +31,9 @@
 # Validate Deserializing Data
 
 # Save the validated data in to database, update the existing data in database
+
+# Model View set
+
+- sometimes we might see the queryset and serializer are repeated, to reduce the redundancy, we can use viewset
+- For modelViewSet, we cn perform all kind of HTTP request, create, update, read destory and so
+- If we only want to read only, we can use ReadOnlyModelViewSet
