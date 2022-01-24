@@ -35,21 +35,10 @@ class CollectionList(ListCreateAPIView):
     queryset = Collection.objects.annotate(products_count=Count('products')).all()
     serializer_class = CollectionSerializer
 
-class CollectionDetail(APIView):
-    def get(self, request, pk):
-        collection = get_object_or_404(
-            Collection.objects.annotate(products_count=Count('products')), pk=pk 
-            )
-        serializer = CollectionSerializer(collection)
-        return Response(serializer.data)
-    def put(self, request, pk):
-        collection = get_object_or_404(
-            Collection.objects.annotate(products_count=Count('products')), pk=pk 
-            )
-        serializer = CollectionSerializer(collection, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer,data=request.data)
+class CollectionDetail(RetrieveUpdateDestroyAPIView):
+    queryset =  Collection.objects.annotate(products_count=Count('products'))
+    serializer_class = CollectionSerializer
+
     def delete(self, request, pk):
         collection = get_object_or_404(
             Collection.objects.annotate(products_count=Count('products')), pk=pk 
