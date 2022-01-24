@@ -10,7 +10,7 @@ class CollectionSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'products_count']
     # id = serializers.IntegerField()
     # title = serializers.CharField(max_length = 255)
-    products_count = serializers.IntegerField()
+    products_count = serializers.IntegerField(read_only=True)
 
 #serializer -  can use it to convert a product object to a Python dictionary
 class ProductSerializer(serializers.ModelSerializer):
