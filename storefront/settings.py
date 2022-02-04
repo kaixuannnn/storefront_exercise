@@ -42,9 +42,9 @@ INSTALLED_APPS = [
     'playground',
     'debug_toolbar',
     'store',
-    'store_custom',
     'tags',
-    'likes'
+    'likes',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +150,5 @@ REST_FRAMEWORK = {
 
 # if we want to make the pagination globally, we can set the pagination number here
 # 'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
+
+AUTH_USER_MODEL ='core.User'
