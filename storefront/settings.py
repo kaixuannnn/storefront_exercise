@@ -145,10 +145,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # dont convert demical to string
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING' : False,
-    'PAGE_SIZE': 10
 }
 
 # if we want to make the pagination globally, we can set the pagination number here
 # 'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
 
-AUTH_USER_MODEL ='core.User'
+AUTH_USER_MODEL ='core.User' 
