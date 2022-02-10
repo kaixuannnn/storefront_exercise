@@ -159,3 +159,9 @@ SIMPLE_JWT = {
 # 'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
 
 AUTH_USER_MODEL ='core.User' 
+
+DJOSER = {
+    'SERIALIZERS':{
+        'user_create':'core.serializers.UserCreateSerializer'
+    }
+}

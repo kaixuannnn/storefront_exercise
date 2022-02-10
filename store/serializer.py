@@ -3,7 +3,7 @@ from site import check_enableusersite
 
 from rest_framework import serializers
 
-from store.models import Cart, CartItem, Product, Collection, Review
+from store.models import Cart, CartItem, Customer, Product, Collection, Review
 
 class CollectionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -111,3 +111,9 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ['id','items','total_price']
 
+class CustomerSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Customer
+        fields = ['id', 'user_id', 'phone', 'birth_date', 'membership']        
